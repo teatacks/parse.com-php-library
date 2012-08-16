@@ -64,6 +64,9 @@ class parseRestClient{
 			if(isset($args['skip'])){
 				$postData['skip'] = $args['skip'];
 			}
+			if(isset($args['include'])){
+				$postData['include'] = $args['include'];
+			}
 			if(count($postData) > 0){
 				$query = http_build_query($postData, '', '&');
 				curl_setopt($c, CURLOPT_URL, $this->parseUrl . $args['url'].'?'.$query);
@@ -142,6 +145,10 @@ class parseRestClient{
 			'url' => $args['className'].'/'.$args['objectId'],
 			'method' => 'GET'
 		);
+
+		if(isset($args['include'])){
+			$params['include'] = $args['include'];
+		}
 		
 		$return = $this->request($params);
 		
@@ -204,6 +211,9 @@ class parseRestClient{
 		}
 		if(isset($args['skip'])){
 			$params['skip'] = $args['skip'];
+		}
+		if(isset($args['include'])){
+			$params['include'] = $args['include'];
 		}
 		
 		$return = $this->request($params);
